@@ -106,7 +106,7 @@ $(document).ready(function () {
   var markerColor;
   $.ajax({
     type: 'GET',
-    url: 'https://eonet.sci.gsfc.nasa.gov/api/v2.1/categories?api_key=e0xaFTehVbUGmZjo2H94BthXsxaR8YYemqp9imxM',
+    url: 'https://eonet.sci.gsfc.nasa.gov/api/v2.1/categories?api_key=TbI0bhoRcpG2zR58H2rjhcEFVABpzegCMacgeIAa',
     dataType: 'json'
   }).done(function (data) {
     data.categories.forEach(function (category) {
@@ -220,6 +220,59 @@ $(document).ready(function () {
     });
     allCats.forEach(function (cat) {
       $('#list').append('<li>' + '<div style="background-color:' + cat.color + '; width: 105px; height: 35px;">' + cat.title + '</div>' + '</li>');
+    });
+  });
+  $.ajax({
+    type: 'GET',
+    url: 'https://eonet.sci.gsfc.nasa.gov/api/v2.1/events?api_key=TbI0bhoRcpG2zR58H2rjhcEFVABpzegCMacgeIAa',
+    dataType: 'json'
+  }).done(function (data) {
+    data.events.forEach(function (event) {
+      allCats.forEach(function (category) {
+        if (event.categories[0].id === category.id) {
+          markerColor = category.color;
+          console.log(markerColor);
+        }
+      });
+      var geometry = event.geometries;
+
+      if (geometry[0].type === 'Point') {
+        var circle = L.geoJson(geometry, {
+          pointToLayer: function pointToLayer(feature, latlng) {
+            return L.circleMarker(latlng, {
+              radius: 15,
+              color: markerColor,
+              weight: 1,
+              opacity: 1,
+              fillOpacity: 0.4,
+              fillColor: markerColor
+            });
+          }
+        }).addTo(mymap);
+      } else {
+        var circle = L.geoJson(geometry, {
+          style: {
+            'color': markerColor,
+            'weight': 2,
+            'opacity': 1,
+            fillOpacity: 0.5
+          }
+        }).addTo(mymap);
+      }
+
+      var date = new Date(geometry[0].date).toDateString();
+      circle.bindPopup(event.title + '<br>' + date);
+      circle.addEventListener('click', function (e) {
+        e = e || window.event;
+        $('#title').empty();
+        $('#date').empty();
+        $('#description').empty();
+        $('#source').empty();
+        $('#title').append(event.title);
+        $('#date').append('CATEGORY: ' + event.categories[0].title + ' | ' + date);
+        $('#description').append(event.description);
+        $('#source').append('<a href="' + event.sources[0].url + '">[Source]</a>');
+      });
     });
   });
 }); // const canvas = document.querySelector('canvas');

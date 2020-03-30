@@ -1,0 +1,14 @@
+#mapid {
+    height: 70vh;
+    width: 100vw;
+}
+
+#list {
+    text-decoration: none;
+    list-style: none;
+    list-style-type: none;
+    display: inline-flex;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+}

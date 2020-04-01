@@ -1,5 +1,4 @@
 const apiKey = "TbI0bhoRcpG2zR58H2rjhcEFVABpzegCMacgeIAa";
-// const apodUrl = "https://api.nasa.gov/planetary/apod"
 
 $(document).ready(function() {
     const mymap = L.map('mapid').setView([0, 0], 2)
@@ -10,7 +9,6 @@ $(document).ready(function() {
     }).addTo(mymap);
 
     const allCats = []
-    // var eventColor = {id: null, color: null}
     let markerColor
 
     $.ajax({

@@ -11,3 +11,5 @@ NaturalEventTracker, or NET, is an app built using NASA's EONET API to visualize
 2. Natural Event geoJSON Markers
 
 3. Chloropleth Mapping 
+
+## Future Additions

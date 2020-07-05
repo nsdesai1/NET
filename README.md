@@ -2,7 +2,7 @@
 
 ## Basic Overview
 
-NaturalEventTracker, or NET, is an app built using NASA's EONET API to visualize and map natural events around the world.
+NaturalEventTracker, or NET, is an app built using NASA's EONET API to track and visualize natural events around the world. 
 
 ## Key Features
 

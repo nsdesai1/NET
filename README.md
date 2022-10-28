@@ -17,4 +17,3 @@ NaturalEventTracker, or NET, is an app built using NASA's EONET API to track and
 1. geoJSON
 
 ## Future Additions
-
